@@ -125,6 +125,62 @@ const taskList = [
     "🌳 Tondre la pelouse"
 ];
 
+const btn7 = document.querySelector('#ex7-button').addEventListener('click', function(){
+    if(taskList.length === 0) return;
 
+    const li = document.createElement('li');
+    li.classList.add('task-list-task');
+    li.textContent = taskList.pop();
+    document.querySelector('#ex7-list').appendChild(li);
+    li.addEventListener('click', function(){
+        taskList.push(this.textContent);
+        this.remove();
+});
+});
+    
 /* ------------------------------------ */
 /* --- Exercice 8 --- */
+
+// const healthElement = document.getElementById("ex8-button-level");
+// const swordsElement = document.getElementById("ex8-button-strength");
+// const shieldElement = document.getElementById("ex8-button-shield");
+
+// const maxValue = 100;
+// const point = 5;
+
+// let stats = {
+//     level: 0,
+//     strength: 0,
+//     shield: 0    
+// };
+
+// function scoreUp (prop,string) {
+//     if(stats[prop] < 100){
+//         stats[prop] += 5;
+//         document.querySelector(string).style.width = stats[prop]+"%";
+//     }
+// }
+
+// healthElement.addEventListener('click', () => {
+//    scoreUp('level', '.progress-val-level') 
+// });
+// swordsElement.addEventListener('click', () => {
+//     scoreUp('strength', '.progress-val-strength')  
+//  });
+// shieldElement.addEventListener('click', () => {
+//     scoreUp('shield', '.progress-val-shield') 
+//  });
+
+let counters = {};
+
+
+document.querySelectorAll('[data-progress-id]').forEach(btn => {
+    btn.addEventListener('click', function(event) {
+       const progressId = this.dataset.progressId;
+       if (counters[progressId] === undefined) counters[progressId] = 0;
+    
+        if (counters[progressId] >= 100) return;
+        counters[progressId] += 5;
+        document.getElementById(progressId).style.width = counters[progressId] + '%';
+    });
+});
